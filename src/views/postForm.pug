@@ -1,0 +1,33 @@
+mixin tdee(name, id)
+  span TDEE（#{name}）：
+  span.result(id="tdee_"+id) N/A
+  br/
+
+html
+  head
+    title PFC Calculator
+    script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
+    link(rel='stylesheet', href='/assets/style.css')
+  body
+    #form
+      input#weight(type='text',placeholder='Weight (kg)')/
+    #result
+      +tdee("久坐", "sedentary")
+      +tdee("輕微運動", "light")
+      +tdee("中度運動", "moderate")
+      +tdee("高度運動", "very")
+      +tdee("極端運動", "extreme")
+  script.
+    $("#weight").change(function() {
+      var weight = $("#weight").val();
+      var bmr = weight * 2.2 * 10;
+      var tdee = function (name, k) {
+        $("#tdee_" + name).text(Math.round(bmr * k));
+      }
+
+      tdee("sedentary", 1.2);
+      tdee("light", 1.375);
+      tdee("moderate", 1.55);
+      tdee("very", 1.725);
+      tdee("extreme", 1.9);
+    });
