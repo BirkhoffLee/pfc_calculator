@@ -2,7 +2,7 @@ express   = require 'express'
 pug       = require 'pug'
 weblogger = require 'morgan'
 
-app = global.pfc.app = express()
+app = global.pfc_app = express()
 port = 1827
 
 ###
