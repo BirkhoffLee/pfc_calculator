@@ -3,7 +3,9 @@ build:
     image: birkhofflee/coffeeforever:node-0.10
     commands:
       - npm install
-      - coffee --compile -o lib/ src/
+      - cp -r src/ lib/
+      - cd lib
+      - coffee --compile .
       - npm test
 notify:
   email:
