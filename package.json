@@ -1,10 +1,14 @@
 {
-  "name": "pfc",
+  "name": "pfc_calculator",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.coffee",
+  "description": "Protein-Fat-Carbohydrate calculator",
+  "main": "src/index.coffee",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha ./test/express.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BirkhoffLee/pfc_calculator.git"
   },
   "author": "Birkhoff Lee <admin@birkhoff.me>",
   "license": "MIT",
@@ -13,5 +17,10 @@
     "express": "^4.14.0",
     "morgan": "^1.7.0",
     "pug": "^2.0.0-beta6"
+  },
+  "devDependencies": {
+    "coffee-script": "^1.12.1",
+    "mocha": "^3.2.0",
+    "supertest": "^2.0.1"
   }
 }
