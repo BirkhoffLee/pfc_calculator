@@ -34,7 +34,7 @@ app.use weblogger ':remote-addr - ":user-agent" - ":method :url HTTP/:http-versi
 # Routes
 ###
 app.get '/', (req, res) ->
-    res.render "postForm.pug"
+    res.render "index.pug"
 
 ####################################
 
