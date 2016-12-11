@@ -26,7 +26,7 @@ html(data-ts-native)
     link(rel='stylesheet', href='//cdn.rawgit.com/TeaMeow/TocasUI/master/dist/tocas.min.css')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
   body
-    .ts.text.container(style="margin-top: 1em")
+    .ts.text.container(style="margin-top: 1em; margin-bottom: 3em;")
       .ts.grid
         .sixteen.wide.column
           h1.ts.header
@@ -36,11 +36,9 @@ html(data-ts-native)
           .ts.fluid.right.labeled.action.input(style="width:100%")
             .ts.label
               | 您的體重
-            input#weight(type='number', onkeypress=)
+            input#weight(type='number', pattern="[0-9]")
             .ts.basic.label
               | kg
-            //- button.ts.button#calculate
-            //-   | 計算
         .sixteen.wide.column
           table.ts.fixed.table#result
             thead
@@ -84,4 +82,3 @@ html(data-ts-native)
     };
 
     $("#weight").keyup(calculate);
-    //- $("#calculate").click(calculate);
