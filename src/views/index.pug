@@ -1,5 +1,5 @@
 mixin pfc(name, id, constant)
-  span [#{name}]
+  span [#{name}]&nbsp;
   span.result(id="pfc_"+id,data-tdee_constant=constant) N/A
   br/
 
@@ -25,15 +25,12 @@ html
       var r = function (f) {
         return Math.round(f);
       }
-      var tdee = function (k) {
-        return r(bmr * k);
-      }
 
       $("div#result span.result").each(function() {
         var p = r(bw * 1.1),
             f = r(bw * 0.4),
-            c = r((tdee($(this).data("tdee_constant")) - 4 * p - 9 * f) / 4);
+            c = r((bmr * $(this).data("tdee_constant") - 4 * p - 9 * f) / 4);
 
-        $(this).text("P: " + p + " F: " + f + " C: " + c);
+        $(this).text("P:" + p + " F:" + f + " C:" + c);
       });
     });
