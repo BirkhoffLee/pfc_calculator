@@ -28,7 +28,7 @@ html(data-ts-native)
             input#weight(type='text')
             .ts.basic.label
               | kg
-            button.ts.button 
+            button.ts.button#calculate
               | 計算
         .sixteen.wide.column
           table.ts.fixed.table#result
@@ -53,7 +53,7 @@ html(data-ts-native)
                     |卡路里（cal）
                   |。
   script.
-    $("#weight").change(function() {
+    var calculate = function() {
       var weight = $("#weight").val();
       var bw = weight * 2.2;
       var bmr = bw * 10;
@@ -70,4 +70,7 @@ html(data-ts-native)
         $("td.f", this).text(f);
         $("td.c", this).text(c);
       });
-    });
+    };
+
+    $("#weight").change(calculate);
+    $("#calculate").click(calculate);
