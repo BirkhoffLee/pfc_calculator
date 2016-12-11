@@ -16,17 +16,17 @@ html(data-ts-native)
     link(rel='stylesheet', href='//cdn.rawgit.com/TeaMeow/TocasUI/master/dist/tocas.min.css')
     link(rel='stylesheet', href='assets/styles.css')
   body
-    .ts.text.container
+    .ts.text.container(style="margin-top: 1em")
       .ts.grid
         .sixteen.wide.column
           h1.ts.header
             | 計算每日所需消耗蛋白質、脂肪、碳水化合物
           .ts.section.divider
         .sixteen.wide.column
-          .ts.right.labeled.action.input(style="width:100%")
+          .ts.fluid.right.labeled.action.input(style="width:100%")
             .ts.label
               | 您的體重
-            input#weight(type='text')/
+            input#weight(type='text')
             .ts.basic.label
               | kg
             button.ts.button 
