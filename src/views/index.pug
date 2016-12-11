@@ -25,10 +25,6 @@ html(data-ts-native)
     link(rel="apple-touch-startup-image", href="/apple-touch-icon-320x480.png")
     link(rel='stylesheet', href='//cdn.rawgit.com/TeaMeow/TocasUI/master/dist/tocas.min.css')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    style.
-      input[type="number"] {
-        -webkit-text-security: disc;
-      }
   body
     .ts.text.container(style="margin-top: 1em; margin-bottom: 3em;")
       .ts.grid
@@ -40,7 +36,7 @@ html(data-ts-native)
           .ts.fluid.right.labeled.action.input(style="width:100%")
             .ts.label
               | 您的體重
-            input#weight(type='number', pattern="[0-9]")
+            input#weight(type='tel')
             .ts.basic.label
               | kg
         .sixteen.wide.column
