@@ -75,7 +75,4 @@ ehthumbs.db
 Thumbs.db
 
 # CUSTOM
-config.coffee
-config.js
 lib/
-blacklist.list

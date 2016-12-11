@@ -1,6 +1,6 @@
-mixin tdee(name, id)
-  span TDEE（#{name}）：
-  span.result(id="tdee_"+id) N/A
+mixin pfc(name, id, constant)
+  span [#{name}]
+  span.result(id="pfc_"+id,data-tdee_constant=constant) N/A
   br/
 
 html
@@ -12,22 +12,34 @@ html
     #form
       input#weight(type='text',placeholder='Weight (kg)')/
     #result
-      +tdee("久坐", "sedentary")
-      +tdee("輕微運動", "light")
-      +tdee("中度運動", "moderate")
-      +tdee("高度運動", "very")
-      +tdee("極端運動", "extreme")
+      +pfc("久坐", "sedentary", 1.2)
+      +pfc("輕微運動", "light", 1.375)
+      +pfc("中度運動", "moderate", 1.55)
+      +pfc("高度運動", "very", 1.725)
+      +pfc("極端運動", "extreme", 1.9)
   script.
     $("#weight").change(function() {
       var weight = $("#weight").val();
-      var bmr = weight * 2.2 * 10;
-      var tdee = function (name, k) {
-        $("#tdee_" + name).text(Math.round(bmr * k));
+      var bw = weight * 2.2;
+      var bmr = bw * 10;
+      var r = function (f) {
+        return Math.round(f);
+      }
+      var tdee = function (k) {
+        return r(bmr * k);
+      }
+      var pfc = function (name, k) {
+        var p = r(bw * 1.1),
+            f = r(bw * 0.4),
+            c = r((tdee(k) - 4 * p - 9 * f) / 4);
+        $("#pfc_" + name).text("P: " + p + " F: " + f + " C: " + c);
       }
 
-      tdee("sedentary", 1.2);
-      tdee("light", 1.375);
-      tdee("moderate", 1.55);
-      tdee("very", 1.725);
-      tdee("extreme", 1.9);
+      $("div#result span.result").each(function() {
+        var p = r(bw * 1.1),
+            f = r(bw * 0.4),
+            c = r((tdee($(this).data("tdee_constant")) - 4 * p - 9 * f) / 4);
+
+        $(this).text("P: " + p + " F: " + f + " C: " + c);
+      });
     });
