@@ -28,12 +28,6 @@ html
       var tdee = function (k) {
         return r(bmr * k);
       }
-      var pfc = function (name, k) {
-        var p = r(bw * 1.1),
-            f = r(bw * 0.4),
-            c = r((tdee(k) - 4 * p - 9 * f) / 4);
-        $("#pfc_" + name).text("P: " + p + " F: " + f + " C: " + c);
-      }
 
       $("div#result span.result").each(function() {
         var p = r(bw * 1.1),
