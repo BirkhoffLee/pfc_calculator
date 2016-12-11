@@ -14,37 +14,45 @@ html(data-ts-native)
     title PFC Calculator
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
     link(rel='stylesheet', href='//cdn.rawgit.com/TeaMeow/TocasUI/master/dist/tocas.min.css')
+    link(rel='stylesheet', href='assets/styles.css')
   body
-    .ts.grid
-      .sixteen.wide.column
-        .ts.fluid.container
-          .ts.right.labeled.action.input
-            .ts.label 您的體重
+    .ts.text.container
+      .ts.grid
+        .sixteen.wide.column
+          h1.ts.header
+            | 計算每日所需消耗蛋白質、脂肪、碳水化合物
+          .ts.section.divider
+        .sixteen.wide.column
+          .ts.right.labeled.action.input(style="width:100%")
+            .ts.label
+              | 您的體重
             input#weight(type='text')/
-            .ts.basic.label kg
-            button.ts.button 計算
-      .sixteen.wide.column
-        table.ts.fixed.table#result
-          thead
-            tr
-              th 運動情況
-              th P
-              th F
-              th C
-          tbody
-            +pfc("久坐", "sedentary", 1.2)
-            +pfc("輕微運動", "light", 1.375)
-            +pfc("中度運動", "moderate", 1.55)
-            +pfc("高度運動", "very", 1.725)
-            +pfc("極端運動", "extreme", 1.9)
-          tfoot
-            tr
-              th(colspan="4")
-                | P：Protein（蛋白質），F：Fat（脂肪），C：Carbohydrate（碳水化合物）。
-                | 以上數據單位均為
-                b
-                  |卡路里（cal）
-                |。
+            .ts.basic.label
+              | kg
+            button.ts.button 
+              | 計算
+        .sixteen.wide.column
+          table.ts.fixed.table#result
+            thead
+              tr
+                th 運動情況
+                th P
+                th F
+                th C
+            tbody
+              +pfc("久坐", "sedentary", 1.2)
+              +pfc("輕微運動", "light", 1.375)
+              +pfc("中度運動", "moderate", 1.55)
+              +pfc("高度運動", "very", 1.725)
+              +pfc("極端運動", "extreme", 1.9)
+            tfoot
+              tr
+                th(colspan="4")
+                  | P：Protein（蛋白質），F：Fat（脂肪），C：Carbohydrate（碳水化合物）。
+                  | 以上數據單位均為
+                  b
+                    |卡路里（cal）
+                  |。
   script.
     $("#weight").change(function() {
       var weight = $("#weight").val();
