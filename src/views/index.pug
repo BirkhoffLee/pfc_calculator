@@ -1,27 +1,50 @@
 mixin pfc(name, id, constant)
-  span [#{name}]&nbsp;
-  span.result(id="pfc_"+id,data-tdee_constant=constant) N/A
-  br/
+  tr(id="pfc_" + id, data-tdee-constant=constant)
+    td #{name}
+    td.p 0
+    td.f 0
+    td.c 0
 
-html
+doctype html
+html(data-ts-native)
   head
     meta(charset='utf-8')
     meta(http-equiv='X-UA-Compatible', content='IE=edge')
-    meta(name='viewport', content='width=device-width, 
-  initial-scale=1.0, minimum-scale=0.8, maximum-scale=2.0, 
-  user-scalable=no')
+    meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
     title PFC Calculator
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    link(rel='stylesheet', href='/assets/style.css')
+    link(rel='stylesheet', href='//cdn.rawgit.com/TeaMeow/TocasUI/master/dist/tocas.min.css')
   body
-    #form
-      input#weight(type='text',placeholder='Weight (kg)')/
-    #result
-      +pfc("久坐", "sedentary", 1.2)
-      +pfc("輕微運動", "light", 1.375)
-      +pfc("中度運動", "moderate", 1.55)
-      +pfc("高度運動", "very", 1.725)
-      +pfc("極端運動", "extreme", 1.9)
+    .ts.grid
+      .sixteen.wide.column
+        .ts.fluid.container
+          .ts.right.labeled.action.input
+            .ts.label 您的體重
+            input#weight(type='text')/
+            .ts.basic.label kg
+            button.ts.button 計算
+      .sixteen.wide.column
+        table.ts.fixed.table#result
+          thead
+            tr
+              th 運動情況
+              th P
+              th F
+              th C
+          tbody
+            +pfc("久坐", "sedentary", 1.2)
+            +pfc("輕微運動", "light", 1.375)
+            +pfc("中度運動", "moderate", 1.55)
+            +pfc("高度運動", "very", 1.725)
+            +pfc("極端運動", "extreme", 1.9)
+          tfoot
+            tr
+              th(colspan="4")
+                | P：Protein（蛋白質），F：Fat（脂肪），C：Carbohydrate（碳水化合物）。
+                | 以上數據單位均為
+                b
+                  |卡路里（cal）
+                |。
   script.
     $("#weight").change(function() {
       var weight = $("#weight").val();
@@ -31,11 +54,13 @@ html
         return Math.round(f);
       }
 
-      $("div#result span.result").each(function() {
+      $("table#result tbody tr").each(function() {
         var p = r(bw * 1.1),
             f = r(bw * 0.4),
-            c = r((bmr * $(this).data("tdee_constant") - 4 * p - 9 * f) / 4);
+            c = r((bmr * $(this).data("tdee-constant") - 4 * p - 9 * f) / 4);
 
-        $(this).text("P:" + p + " F:" + f + " C:" + c);
+        $("td.p", this).text(p);
+        $("td.f", this).text(f);
+        $("td.c", this).text(c);
       });
     });
