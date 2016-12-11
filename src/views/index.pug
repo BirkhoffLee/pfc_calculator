@@ -36,11 +36,11 @@ html(data-ts-native)
           .ts.fluid.right.labeled.action.input(style="width:100%")
             .ts.label
               | 您的體重
-            input#weight(type='text')
+            input#weight(type='number', onkeypress=)
             .ts.basic.label
               | kg
-            button.ts.button#calculate
-              | 計算
+            //- button.ts.button#calculate
+            //-   | 計算
         .sixteen.wide.column
           table.ts.fixed.table#result
             thead
@@ -61,7 +61,7 @@ html(data-ts-native)
                   | P：Protein（蛋白質），F：Fat（脂肪），C：Carbohydrate（碳水化合物）。
                   | 以上數據單位均為
                   b
-                    |卡路里（cal）
+                    |公克（g）
                   |。
   script.
     var calculate = function() {
@@ -83,5 +83,5 @@ html(data-ts-native)
       });
     };
 
-    $("#weight").change(calculate);
-    $("#calculate").click(calculate);
+    $("#weight").keypress(calculate);
+    //- $("#calculate").click(calculate);
