@@ -33,8 +33,20 @@ app.use weblogger ':remote-addr - ":user-agent" - ":method :url HTTP/:http-versi
 ###
 # Routes
 ###
-app.get '/', (req, res) ->
-    res.render "index.pug"
+render = (req, res) ->
+    params = req.params;
+    params._base_url = "http://#{req.headers.host}";
+    res.render "index.pug", params
+
+app.get '/', render
+app.get '/:gender/:age/:height/:weight/', render
+app.get '/:gender/:age/:height/:weight', render
+app.get '/:gender/:age/:height/', render
+app.get '/:gender/:age/:height', render
+app.get '/:gender/:age/', render
+app.get '/:gender/:age', render
+app.get '/:gender/', render
+app.get '/:gender', render
 
 ####################################
 
