@@ -33,12 +33,41 @@ html(data-ts-native)
             | 計算每日所需消耗蛋白質、脂肪、碳水化合物
           .ts.section.divider
         .sixteen.wide.column
-          .ts.fluid.right.labeled.action.input(style="width:100%")
-            .ts.label
-              | 您的體重
-            input#weight(type='tel')
-            .ts.basic.label
-              | kg
+          .ts.form
+            .two.fields
+              .field
+                label
+                  | 性別
+                .ts.fluid.buttons
+                  button.ts.labeled.icon.inverted.button#male(data-selected="no")
+                    i.male.icon
+                    | 男性
+                  button.ts.labeled.icon.negative.button#female(data-selected="no")
+                    i.female.icon
+                    | 女性
+              .field
+                label
+                  | 身高
+                .ts.fluid.right.labeled.input
+                  input#height(type='tel')
+                  .ts.basic.label
+                    | cm
+            .two.fields
+              .field
+                label
+                  | 體重
+                .ts.fluid.right.labeled.input
+                  input#weight(type='tel')
+                  .ts.basic.label
+                    | kg
+              .field
+                label
+                  | 年齡
+                .ts.fluid.right.labeled.input
+                  input#age(type='tel')
+                  .ts.basic.label
+                    | 歲
+          .ts.section.divider
         .sixteen.wide.column
           table.ts.fixed.table#result
             thead
@@ -64,8 +93,17 @@ html(data-ts-native)
   script.
     var calculate = function() {
       var weight = $("#weight").val();
+      var height = $("#height").val();
+      var age = $("#age").val();
+
       var bw = weight * 2.2;
-      var bmr = bw * 10;
+
+      if ($("#male").data('selected') == "yes") {
+        var bmr = (13.7 * weight + 5 * height - 6.8 * age) + 66;
+      } else {
+        var bmr = (9.6 * weight + 1.8 * height - 4.7 * age) + 655;
+      }
+
       var r = function (f) {
         return Math.round(f);
       }
@@ -75,10 +113,38 @@ html(data-ts-native)
             f = r(bw * 0.4),
             c = r((bmr * $(this).data("tdee-constant") - 4 * p - 9 * f) / 4);
 
+        if (weight == "" || height == "" || age == "" || $("#male").data('selected') == $("#female").data('selected') == "no") {
+          p = f = c = 0;
+        }
+
         $("td.p", this).text(p);
         $("td.f", this).text(f);
         $("td.c", this).text(c);
       });
     };
 
+    var genderSwitchToMale = function () {
+      $("#male i").attr('class', 'check circle icon');
+      $("#female i").attr('class', 'female icon');
+
+      $("#male").data('selected', 'yes');
+      $("#female").data('selected', 'no');
+
+      calculate();
+    }
+
+    var genderSwitchToFemale = function () {
+      $("#female i").attr('class', 'check circle icon');
+      $("#male i").attr('class', 'male icon');
+
+      $("#female").data('selected', 'yes');
+      $("#male").data('selected', 'no');
+
+      calculate();
+    }
+
     $("#weight").keyup(calculate);
+    $("#height").keyup(calculate);
+    $("#age").keyup(calculate);
+    $("#male").click(genderSwitchToMale);
+    $("#female").click(genderSwitchToFemale);
