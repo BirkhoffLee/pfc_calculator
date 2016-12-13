@@ -25,7 +25,7 @@ html(data-ts-native)
     link(rel="apple-touch-startup-image", href="/apple-touch-icon-320x480.png")
     link(rel='stylesheet', href='//cdn.rawgit.com/TeaMeow/TocasUI/master/dist/tocas.min.css')
     script(src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js')
-    script(src='https://cdnjs.cloudflare.com/ajax/libs/history.js/1.8/native.history.min.js')
+    //- script(src='https://cdnjs.cloudflare.com/ajax/libs/history.js/1.8/native.history.min.js')
   body
     .ts.text.container(style="margin-top: 1em; margin-bottom: 3em")
       .ts.grid
@@ -177,7 +177,7 @@ html(data-ts-native)
     }
     
     var updateURL = function (url) {
-      return History.pushState('' ,'', url);
+      return history.pushState('' ,'', url);
     }
     
     var updateAutoFillURL = function () {
