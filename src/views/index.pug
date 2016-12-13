@@ -174,7 +174,11 @@ html(data-ts-native)
 
       calculate();
     }
-
+    
+    var updateURL = function (url) {
+      return history.pushState('' ,'', url);
+    }
+    
     var updateAutoFillURL = function () {
       var finalURL = base_url;
       var weight = $("#weight").val();
@@ -186,32 +190,32 @@ html(data-ts-native)
       } else if ($("#female").data('selected') == "yes") {
         finalURL += "/female";
       } else {
-        $("#autoFillURL").val(finalURL);
+        updateURL(finalURL);
         return;
       }
 
       if (age != "") {
         finalURL += "/" + age;
       } else {
-        $("#autoFillURL").val(finalURL);
+        updateURL(finalURL);
         return;
       }
 
       if (height != "") {
         finalURL += "/" + height;
       } else {
-        $("#autoFillURL").val(finalURL);
+        updateURL(finalURL);
         return;
       }
 
       if (weight != "") {
         finalURL += "/" + weight;
       } else {
-        $("#autoFillURL").val(finalURL);
+        updateURL(finalURL);
         return;
       }
 
-      $("#autoFillURL").val(finalURL);
+      updateURL(finalURL);
     }
 
     $("#weight").keyup(calculate);
@@ -222,6 +226,6 @@ html(data-ts-native)
   if gender && age && height && weight
     script.
       calculate();
-  if gender || age || height || weight
+  //- if gender || age || height || weight
     script.
       updateAutoFillURL();
