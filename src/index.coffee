@@ -34,9 +34,7 @@ app.use weblogger ':remote-addr - ":user-agent" - ":method :url HTTP/:http-versi
 # Routes
 ###
 render = (req, res) ->
-    params = req.params;
-    params._base_url = "http://#{req.headers.host}";
-    res.render "index.pug", params
+    res.render "index.pug", req.params
 
 app.get '/', render
 app.get '/:gender/:age/:height/:weight/', render
